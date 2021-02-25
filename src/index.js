@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Temperature from '../src/components/Temperature.js'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Temperature />
   </React.StrictMode>,
   document.getElementById('root')
 );

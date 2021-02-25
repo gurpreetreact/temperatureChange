@@ -1,23 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useState } from "react";
+
+const Temperature = ({name, temperature, handleChange}) => {
+  return (
+    <Fragment>
+      <div>
+        {" "}
+        {/* className={{ textAlign: "center", width: "100%" }} */}
+        <input
+          type="number"
+          name={name}
+          placeholder={name}
+          value={temperature}
+          onChange={handleChange}
+        />{" "}
+        <br />
+      </div>
+    </Fragment>
+  );
+}
 
 function App() {
+  const [fahrenheit, setFahrenheit] = useState(null);
+  const [celsius, setCelsius] = useState(null);
+
+  const fahrenheitChange = (e) => {
+    setFahrenheit(e.target.value);
+    if (e.target.value === "") {
+      return setCelsius(e.target.value);
+    }
+    setCelsius(((e.target.value - 32) * 5) / 9);
+  };
+
+  const celsiusChange = (e) => {
+    setCelsius(e.target.value);
+    if (e.target.value === "") {
+      return setFahrenheit(e.target.value);
+    }
+    setFahrenheit((e.target.value * 9) / 5 + 32);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Temperature
+        name="Temperature in Fahrenheit"
+        temperature={fahrenheit}
+        handleChange={(e) => fahrenheitChange(e)}
+      />
+      <Temperature
+        name="Temperature in Celsius"
+        temperature={celsius}
+        handleChange={(e) => celsiusChange(e)}
+      />
+      <p></p>
     </div>
   );
 }
